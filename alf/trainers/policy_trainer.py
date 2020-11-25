@@ -191,7 +191,9 @@ class Trainer(object):
             checkpoint_saved = True
         finally:
             if self._config.confirm_checkpoint_upon_crash and not checkpoint_saved:
-                ans = input("Do you want to save checkpoint? (y/n): ")
+                #ans = input("Do you want to save checkpoint? (y/n): ")
+                # Default force to result as "yes"
+                ans = "y"
                 if ans.lower().startswith('y'):
                     self._save_checkpoint()
             self._close()

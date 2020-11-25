@@ -1,12 +1,11 @@
 # ddpg for pendulum
 
 # include default ddpg config from file `ddpg.gin`
-include 'ddpg.gin'
+include 'research/config/ddpg.gin'
 
 # environment config
-NUM_PARALLEL_ENVIRONMENTS=1
-#create_environment.env_name="Pendulum-v0"
-create_environment.env_name="LunarLanderContinuous-v2"
+NUM_PARALLEL_ENVIRONMENTS=32
+create_environment.env_name="BipedalWalker-v2"
 create_environment.num_parallel_environments=%NUM_PARALLEL_ENVIRONMENTS
 
 
@@ -34,9 +33,9 @@ TrainerConfig.mini_batch_length=2
 TrainerConfig.unroll_length=1
 TrainerConfig.mini_batch_size=64
 TrainerConfig.num_updates_per_train_iter=1
-TrainerConfig.num_iterations=10000
+TrainerConfig.num_iterations=100000
 TrainerConfig.num_checkpoints=5
-TrainerConfig.evaluate=False
+TrainerConfig.evaluate=True
 TrainerConfig.debug_summaries=True
 TrainerConfig.summarize_grads_and_vars=True
 TrainerConfig.summary_interval=100

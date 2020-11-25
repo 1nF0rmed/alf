@@ -1,0 +1,40 @@
+# PPO implementation
+
+include 'research/config/ppo.gin'
+include 'research/config/atari.gin'
+
+# Loading Atari environment
+create_environment.env_name='BreakoutNoFrameskip-v4'
+# Do not use suite_atari.load as it has some resetting issue!
+create_environment.num_parallel_environments=64
+
+# Algorithm config
+PPOLoss.entropy_regularization=0.0
+PPOLoss.gamma=0.99
+PPOLoss.normalize_advantages=True
+PPOLoss.td_lambda=0.95
+PPOLoss.td_error_loss_fn=@element_wise_squared_loss
+PPOLoss.check_numerics=True
+
+CONV_LAYER_PARAMS=((32, 8, 4), (64, 4, 2), (64, 3, 1))
+
+# Algorithm structure
+actor/ActorDistributionNetwork.fc_layer_params=(512,)
+actor/ActorDistributionNetwork.conv_layer_params=%CONV_LAYER_PARAMS
+CategoricalProjectionNetwork.logits_init_output_factor=1e-10
+
+value/ValueNetwork.fc_layer_params=(512,)
+value/ValueNetwork.conv_layer_params=%CONV_LAYER_PARAMS
+
+# Optimizer selection
+ac/AdamTF.lr=2e-4
+
+# Training configuration
+TrainerConfig.unroll_length=8
+TrainerConfig.algorithm_ctor=@Agent
+TrainerConfig.num_iterations=0
+TrainerConfig.num_env_steps=5000000
+TrainerConfig.evaluate=True
+TrainerConfig.debug_summaries=1
+TrainerConfig.summarize_grads_and_vars=1
+TrainerConfig.summary_interval=10

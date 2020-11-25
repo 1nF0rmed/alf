@@ -1,10 +1,10 @@
 include 'muzero.gin'
 
-import alf.environments.suite_tic_tac_toe
+# import alf.environments.suite_tic_tac_toe
 
-create_environment.env_name=""
-#create_environment.env_name="Pendulum-v0"
-create_environment.env_load_fn=@suite_tic_tac_toe.load
+#create_environment.env_name=""
+create_environment.env_name="Pendulum-v0"
+#create_environment.env_load_fn=@suite_tic_tac_toe.load
 create_environment.num_parallel_environments=32
 
 MCTSAlgorithm.num_simulations=20

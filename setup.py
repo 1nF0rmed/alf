@@ -22,6 +22,8 @@ setup(
     version='0.0.1',
     install_requires=[
         'atari_py == 0.1.7',
+        'termcolor == 1.1.0',
+        'box2d-py==2.3.8',
         'cpplint',
         'clang-format == 9.0',
         'fasteners',

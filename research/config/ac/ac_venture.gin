@@ -5,15 +5,15 @@ import alf.algorithms.agent
 import alf.algorithms.actor_critic_algorithm
 import alf.trainers.policy_trainer
 
-include 'atari.gin'
+include 'research/config/atari.gin'
 # From OpenAI gym wiki:
 # "v0 vs v4: v0 has repeat_action_probability of 0.25
 #  (meaning 25% of the time the previous action will be used instead of the new action),
 #   while v4 has 0 (always follow your issued action)
 # Because we already implements frame_skip in AtariPreprocessing, we should always
 # use 'NoFrameSkip' Atari environments from OpenAI gym
-#create_environment.env_name='BreakoutNoFrameskip-v4'
-create_environment.env_name='PongNoFrameskip-v4'
+# Environment
+create_environment.env_name='AdventureNoFrameskip-v4'
 # Do not use suite_atari.load as it has some resetting issue!
 create_environment.num_parallel_environments=64
 
@@ -48,11 +48,7 @@ TrainerConfig.unroll_length=8
 TrainerConfig.algorithm_ctor=@Agent
 TrainerConfig.num_iterations=0
 TrainerConfig.num_env_steps=5000000
-TrainerConfig.evaluate=False
+TrainerConfig.evaluate=True
 TrainerConfig.debug_summaries=1
 TrainerConfig.summarize_grads_and_vars=1
 TrainerConfig.summary_interval=10
-
-
-
-

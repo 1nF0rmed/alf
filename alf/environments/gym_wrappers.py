@@ -406,7 +406,11 @@ class DMAtariPreprocessing(gym.Wrapper):
         self.frame_skip = frame_skip
         self.screen_size = screen_size
         self.noop_max = noop_max
-        assert env.unwrapped.get_action_meanings()[0] == "NOOP"
+
+        try:
+            assert env.unwrapped.get_action_meanings()[0] == "NOOP"
+        except:
+            assert env.get_action_meanings()[0] == "NOOP"
 
         obs_dims = self.env.observation_space
         # Stores temporary observations used for pooling over two successive
