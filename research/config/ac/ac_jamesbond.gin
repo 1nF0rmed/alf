@@ -4,7 +4,7 @@
 import alf.algorithms.agent
 import alf.algorithms.actor_critic_algorithm
 import alf.trainers.policy_trainer
-
+ 
 include 'research/config/atari.gin'
 # From OpenAI gym wiki:
 # "v0 vs v4: v0 has repeat_action_probability of 0.25
